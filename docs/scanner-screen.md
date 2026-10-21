@@ -8,7 +8,7 @@ capture guide. It never opens or includes an image editor.
 
 See [scanner and result screenshots](visual-demos.md) for a synthetic-card example.
 
-<img src="assets/screenshots/identity-scanner.png" alt="Supplied AresIdentity scanner detecting a synthetic bank card" width="280">
+<img src="../media/identity-scanner.png" alt="Supplied AresIdentity scanner detecting a synthetic bank card" width="280">
 
 ```dart
 import 'package:flutter/material.dart';

@@ -6,7 +6,7 @@ scanner and a host application displaying its redacted output.
 
 ## Supplied scanner route
 
-<img src="assets/screenshots/identity-scanner.png" alt="AresIdentity live scanner detecting a synthetic bank card with Minimal privacy selected" width="320">
+<img src="../media/identity-scanner.png" alt="AresIdentity live scanner detecting a synthetic bank card with Minimal privacy selected" width="320">
 
 The AresScan-style scanner provides black back/flash controls, privacy-level
 selection, Redact/Analyse modes, state hints and an animated guide. This capture
@@ -17,7 +17,7 @@ configurable; see [the supplied route](scanner-screen.md). Use
 
 ## Cropped image after redaction
 
-<img src="assets/screenshots/redacted-card-aresscan.png" alt="AresScan+ displaying the cropped synthetic card with its number covered by a solid black mask" width="320">
+<img src="../media/redacted-card-aresscan.png" alt="AresScan+ displaying the cropped synthetic card with its number covered by a solid black mask" width="320">
 
 The example masks the card number while leaving the synthetic cardholder and
 expiry visible. Privacy policies determine which detected fields are masked;
@@ -35,8 +35,8 @@ level `none`; cancellation returns null.
 
 ## Image assets
 
-- [Original scanner screenshot PNG](assets/screenshots/identity-scanner.png)
-- [Original redacted-result screenshot PNG](assets/screenshots/redacted-card-aresscan.png)
+- [Original scanner screenshot PNG](../media/identity-scanner.png)
+- [Original redacted-result screenshot PNG](../media/redacted-card-aresscan.png)
 
 The original supplied screenshots are retained without retouching. The bank
 card is labelled TEST ONLY — NOT A PAYMENT CARD and contains synthetic data.

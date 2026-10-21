@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Follow the AresEdge documentation structure with branded README, integration choices, app badges, screenshot workflows, licence setup, customer examples and branding/media folders. Retain the existing verification guides and unpublished release status.
+
 - Verify consecutive supplied-route Redact/Analyse captures on iPhone 13 and Galaxy S24; add synthetic bank-card and driver-licence documentation PNGs.
 - Coordinate the iOS scanner-core fix that prioritizes precise model corners and explicit confidence over heatmap fallback independently of output order.
 

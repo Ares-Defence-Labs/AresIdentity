@@ -1,97 +1,284 @@
+[![Ares Defence Labs](https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/1a554f511259b818e3ef84faed64de61057fe269/branding/ares-defence-labs-banner.png)](https://aresdefencelabs.com)
+
 # AresIdentity
 
-Flutter identity document capture, on-device sensitive-field analysis and solid image redaction for Android and iOS. Supports passports, driver licences and bank cards, with a ready-made screen or an embedded camera under your own UI.
+[Official website](https://aresdefencelabs.com/) · [GitHub repository](https://github.com/Ares-Defence-Labs/AresIdentity) · [Developer documentation](https://aresdefencelabs.com/development-sdks?sdk=identity-scanner&view=overview)
 
-**Private source SDK in development. The customer package is not published yet.** Package publication and live checkout remain disabled until the release verification gates pass.
+> **Commercial SDK — paid licence required for production use.**
+> AresIdentity is proprietary software from Ares Defence Labs. Developers can
+> evaluate the SDK using its native 60-second live-session trial. Without a valid
+> licence, scanning deactivates when the trial expires.
+>
+> Configure the full signed licence key in application source or private build
+> configuration. One customer licence covers unlimited apps across supported
+> platforms. Ship a replacement key before expiry so existing app installations
+> retain access.
+>
+> [Licensing and availability](https://aresdefencelabs.com/development-sdks?sdk=identity-scanner&view=overview) · [Read the commercial licence](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/LICENSE)
 
-## Architecture and installation
+Commercial Flutter identity-document capture, on-device sensitive-field analysis
+and solid image redaction for Android and iOS. Supports passports, driver licences,
+bank cards and heuristic identity-card field detection with Latin OCR.
 
-The Identity SDK uses the public protected `ares_edge` camera. It does not embed another Edge camera implementation or require the private owner UI package. ML Kit performs OCR on device. Exposure policies, document classification and masking execute in the compiled `ares_identity_native` implementation. The public Dart API contains models and platform adapters. The nested `ares_identity_core` retains private owner compatibility types and legacy helpers; those helper algorithms are excluded from customer artifacts.
+Open **AresIdentityScreen** for the supplied AresScan-style scanner, or use
+**IdentityIntelligenceScanStreamer** for an embedded camera under your own UI.
+The supplied route returns the cropped image after the selected privacy treatment
+and an enum describing the applied level. Your app handles the result.
 
-For authorized source development:
+**Current availability:** the customer package is not published. SDK publication
+and live checkout remain disabled pending final artifact verification. This
+repository provides documentation and support, rather than a Git dependency or
+the SDK implementation. See [release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md).
 
-```yaml
-dependencies:
-  ares_identity:
-    path: ../IdentitySDK/ares_identity
+## Choose your scanner integration
+
+**Build your own UI:** embed `IdentityIntelligenceScanStreamer`, supply your own
+controls and hints, and use `LiveIdentityEdgeScanController` for capture and mode
+selection. Your app chooses when to analyse and redact the captured image.
+
+**Use the provided UI:** open `AresIdentityScreen` for privacy controls,
+Redact/Analyse selection, animated guide and state hints. Configure guide colour,
+state-based hints and the stable-document countdown without rebuilding its layout.
+The route applies the selected privacy policy and returns the cropped image/level
+tuple directly, without opening an image editor.
+
+### 1. Capture an identity document
+
+<img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/1a554f511259b818e3ef84faed64de61057fe269/media/identity-scanner.png" alt="AresIdentity supplied scanner detecting a synthetic bank card with Minimal privacy selected" width="280">
+
+Hold a confident document steady, follow the countdown and receive a
+perspective-corrected crop. Movement or stale detection cancels pending capture.
+See [the supplied scanner](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/scanner-screen.md).
+
+### 2. Apply the selected privacy treatment
+
+Redact offers Minimal, Balanced and Strict policies. In the synthetic card below,
+the number is masked while the cardholder and expiry remain visible. Analyse
+returns cropped pixels without masks. Review the output before sharing.
+
+<img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/1a554f511259b818e3ef84faed64de61057fe269/media/redacted-card-aresscan.png" alt="Cropped synthetic bank card with its number masked, displayed in AresScan+" width="280">
+
+This result is displayed in **AresScan+**, the host application. Its editor,
+Save/Share, Pages, AI Tools and surrounding controls are app features.
+AresIdentity returns image bytes and an applied-level enum; it does not include
+that editor. See [screenshots and feature scope](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md).
+
+### 3. Return the image to your app
+
+`AresIdentityScanResult` is a named Dart record:
+`({AresIdentityRedactionLevel level, Uint8List bytes})`.
+The enum is `none`, `minimal`, `balanced` or `strict`. Analyse and scans with no
+identified masking regions return `none`. The level describes the applied policy;
+it does not certify complete discovery of sensitive fields.
+
+## Scanner appearance, hints and countdown
+
+Set `overlayColor`, `hintBuilder` and `captureTimeout` on `AresIdentityScreen.open`.
+`captureTimeout` accepts whole seconds from 1 through 10 (default 2), configuring
+the countdown after stable detection. It is not a maximum session duration.
+The complete example below shows each setting.
+
+The guide stays inactive while searching and animates during detection/countdown;
+no filled overlay obscures the document. Custom settings preserve native
+confidence, motion, freshness and licence checks. For the embedded camera, use
+`onScanStateChanged` to drive your own state hints. See [scanner configuration](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/scanner-screen.md).
+
+## Try AresIdentity in AresScan+
+
+Experience identity-document scanning in **AresScan+**, the official
+Ares Defence Labs app.
+
+[![Get AresScan+ on Google Play](https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/1a554f511259b818e3ef84faed64de61057fe269/branding/google-play-badge.png)](https://play.google.com/store/apps/details?id=ai.aresdefencelabs.aresscan) [![Download AresScan+ on the App Store](https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/1a554f511259b818e3ef84faed64de61057fe269/branding/app-store-badge.png)](https://apps.apple.com/us/app/aresscan/id6759765449)
+
+[Discover AresScan+](https://aresdefencelabs.com/ares-scan) · [Explore more Ares Defence Labs SDKs](https://aresdefencelabs.com/development-sdks)
+
+## See scanning and redaction in action
+
+The screenshots use a fictional sandbox bank card. Download the
+[bank card and driver-licence PNG fixtures](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
+for integration screenshots and repeatable camera checks. All fixture names and
+identifiers are synthetic. See [visual demos](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md) for
+original screenshots and the distinction between SDK and host-app features.
+
+## Run the example application
+
+The customer candidate includes an `example/` app for capture, on-device analysis
+and redacted-image preview. Run it on a physical device:
+
+```sh
+# From an approved local customer package:
+cd example
+flutter pub get
+flutter run --dart-define=ARES_IDENTITY_LICENCE=YOUR_PORTAL_ISSUED_KEY
 ```
 
-Use Flutter 3.44+ / Dart 3.12+; the example/documentation tools use Dart 3.13.4+. The compiled shared native core must advertise Identity licence protocol 2, AID2 support and native authority ABI 1. Older hosted Edge binaries cannot validate Identity keys; the SDK reports an actionable compatibility message. Local native candidates are development overrides, not published release versions.
-
-## Two scanner integrations
-
-1. **Supplied activity-style route:** `AresIdentityScreen.open(context, ...)`
-   presents the AresScan-style Identity UI, applies the selected privacy
-   treatment, and returns `({AresIdentityRedactionLevel level, Uint8List bytes})`.
-   The image is cropped; no image editor is opened. Cancellation returns null.
-   Set the guide color, state-based hints and native stable-document countdown
-   (`captureTimeout`, whole seconds 1–10; default 2) without rebuilding the layout.
-2. **Embedded scanner:** `IdentityIntelligenceScanStreamer` supplies the camera
-   and native capture behavior. Your app owns the controls, layout, hints and
-   subsequent recognition/redaction workflow.
-
-Both integrations use the same protected camera and Identity licensing.
-The route's enum is `none`, `minimal`, `balanced` or `strict`; Analyse or no
-identified masking regions returns `none`. The enum is a policy label, not a
-claim that OCR found all sensitive fields.
-
-## See the scanner and redacted result
-
-| Identity capture | Redacted image in AresScan+ |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/e5f4c7a85fadb22037101d5a68cadc8e435b9c9e/docs/assets/screenshots/identity-scanner.png" alt="AresIdentity scanner with Minimal privacy selected and a synthetic bank card detected" width="280"> | <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/e5f4c7a85fadb22037101d5a68cadc8e435b9c9e/docs/assets/screenshots/redacted-card-aresscan.png" alt="Cropped synthetic bank card with its number masked, displayed by the AresScan+ host app" width="280"> |
-
-The scanner offers Minimal, Balanced and Strict privacy levels, Redact/Analyse
-modes, document-state hints and an animated capture guide. The result screenshot
-shows the synthetic card number covered by a solid mask; the cardholder and
-expiry remain visible in this example.
-
-**The result is displayed in AresScan+, the host application.** Its editor,
-Save/Share controls, Pages and AI Tools are application features. The
-AresIdentity supplied route returns the cropped, privacy-treated image bytes
-and applied-level enum directly to your app; it does not open an editor.
-
-[View the screenshot guide](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md)
-· [Download synthetic test documents](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
-
-## Capture, review and redact
-
-```dart
-import 'package:ares_identity/ares_identity.dart';
-
-// AresIdentityScreen.open returns the processed level/bytes tuple.
-// The embedded callback receives AresIdentityImage with cropped image.bytes.
-// Analyse the exact upright captured pixels, present regions for review,
-// then call analysis.redact(image.bytes) to produce a new JPEG.
-```
-
-The public capture result contains encoded document pixels, optional dimensions and an isDocumentCropped flag. It does not expose uncropped original bytes, raw detector geometry or face detection. OCR uses ML Kit's Latin recognizer; externally recognized text can be passed to analyseIdentity. Low/balanced/maximum aggression select document masking policies. Detection is heuristic and does not establish authenticity or identity.
-
-## Licensing
-
-The configured fee matches AresEdge: US$600 per twelve-month term, covering the customer's supported apps. Supply the complete AID2 token with signed product AresIdentitySDK, not an Edge/PDF/Office key or a portal licence ID. Missing, invalid or expired keys use the native process-wide 60-second camera trial. Remounting does not reset it; renewal requires shipping a replacement key before expiry.
-
-All licence tests in this project use sandbox keys. Production issuer pins remain unchanged and reject sandbox signatures. Sandbox-trusted artifacts stay isolated, clearly labelled and non-publishable. Live paid-licence validation is not claimed.
+Obtain an approved local candidate for evaluation; no hosted version is announced
+yet. Do not use this documentation repository as a Flutter dependency.
+See [example setup](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/example-project.md) and
+[performance testing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/performance-testing.md) for device checks.
 
 ## Documentation
 
-- [Getting Started](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/getting-started.md)
-- [Platforms](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/platforms.md)
-- [Screenshots and Result Examples](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md)
-- [Scanner Screen](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/scanner-screen.md)
-- [Embedded Camera](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md)
-- [Recognition And Redaction](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/recognition-and-redaction.md)
-- [Api Reference](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/api-reference.md)
-- [Licensing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/licensing.md)
-- [Example Project](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/example-project.md)
-- [Performance Testing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/performance-testing.md)
-- [Synthetic Test Fixtures](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
-- [Release Status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md)
+- [Installation and quick start](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/getting-started.md)
+- [Embedded camera and custom controls](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md)
+- [Ready-made scanner](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/scanner-screen.md)
+- [Recognition, exposure analysis and redaction](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/recognition-and-redaction.md)
+- [Complete public API reference](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/api-reference.md)
+- [Offline licensing, trial and renewal](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/licensing.md)
+- [Platform setup and troubleshooting](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/platforms.md)
+- [Screenshots and feature scope](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md)
+- [Performance and device testing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/performance-testing.md)
+- [Example application](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/example-project.md)
+- [Synthetic bank card and driver licence](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
+- [Release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md)
 
-## Verification and packaging
+- [Report a bug or ask a question](https://github.com/Ares-Defence-Labs/AresIdentity/issues)
 
-Run flutter analyze and flutter test test packages/ares_identity_core/test. The example contains physical camera/OCR/redaction/trial tests. The protected candidate passed five physical tests on each of Galaxy S24 and iPhone 13, including public-camera capture, native OCR/masking and sandbox licensing after trial expiry. Coordinated release and production-trust gates remain separate. See the private physical-device report for evidence scope.
+## Configure your licence
 
-`python3 tool/documentation/build_api.py` generates and validates HTML API docs with isolated pinned tooling; `python3 tool/documentation/verify_examples.py` analyzes complete guide examples. `tool/distribution/build_customer_package.py` assembles a guarded local single-package candidate, requires hashed Android/iOS native binaries, includes only public models and thin adapters, and retains only public Flutter/ML Kit/AresEdge dependencies. It never publishes.
+Supply the full signed AID2 customer key authorizing AresIdentitySDK, rather than
+a portal licence ID or another SDK's key. End users do not enter licence keys.
+The configured fee matches AresEdge: US$600 per twelve-month term. Live checkout
+remains disabled until release verification completes.
 
-Commercial use is governed by [LICENSE](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/LICENSE). See SECURITY.md and SUPPORT.md for private reporting and safe reproductions.
+```dart
+const licenceKey = String.fromEnvironment('ARES_IDENTITY_LICENCE');
+```
+
+```sh
+flutter run --dart-define=ARES_IDENTITY_LICENCE=YOUR_PORTAL_ISSUED_KEY
+```
+
+Keys verify offline. Missing, invalid or expired keys use the shared native
+60-second process trial; remounting the camera does not restart it. Replace the
+embedded key in every app before expiry. Never commit a real key to a repository.
+
+**Sandbox keys require an isolated sandbox-trusted test build.** Release trust
+rejects sandbox signatures. Native licence QA uses sandbox keys, without requiring
+a live payment. See [licensing and renewal](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/licensing.md).
+
+## Ready-made scanner: AresIdentityScreen
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:ares_identity/ares_identity.dart';
+
+Future<AresIdentityScanResult?> scanIdentity(BuildContext context) async {
+  final result = await AresIdentityScreen.open(
+    context,
+    licenceKey: const String.fromEnvironment('ARES_IDENTITY_LICENCE'),
+    overlayColor: const Color(0xFF00FFD1),
+    captureTimeout: const Duration(seconds: 3),
+    hintBuilder: (state) => switch (state.phase) {
+      'searching' => 'Place your document inside the guide',
+      'holding' => 'Keep the document steady',
+      'countdown' => 'Capturing in ${state.remainingSeconds}',
+      'capturing' => 'Taking photo…',
+      'processing' => 'Applying privacy treatment…',
+      'error' => 'Could not process this document. Please try again.',
+      _ => state.message,
+    },
+  );
+  if (result == null) return null; // Back or trial expiry.
+  // Named Dart tuple: result.level is the applied enum;
+  // result.bytes is the cropped image after the chosen privacy treatment.
+  return result;
+}
+```
+
+The route returns cropped encoded image bytes after privacy treatment. In Redact
+mode, processing failures keep the route open with an error rather than returning
+untreated pixels as a redacted result. Analyse returns unmasked cropped bytes and
+level `none`. `onAnalysis` optionally receives the same capture's findings.
+Cancellation or trial expiry returns null. Your app can display
+`Image.memory(result.bytes)`, save the bytes or continue its own workflow.
+
+## Custom camera: IdentityIntelligenceScanStreamer
+
+Retain the controller and flash notifier in State, add your own controls and
+handle captured bytes:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:ares_identity/ares_identity.dart';
+
+class IdentityCamera extends StatefulWidget {
+  const IdentityCamera({super.key, required this.licenceKey});
+  final String licenceKey;
+  @override
+  State<IdentityCamera> createState() => _IdentityCameraState();
+}
+
+class _IdentityCameraState extends State<IdentityCamera> {
+  final flash = ValueNotifier(false);
+  final controller = LiveIdentityEdgeScanController();
+  @override
+  void dispose() {
+    flash.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: IdentityIntelligenceScanStreamer(
+      (status) { /* Show capture status. */ },
+      (capture) { /* Review capture.bytes, the cropped encoded image. */ },
+      showHint: (visible) {},
+      flashOn: flash,
+      controller: controller,
+      isManualMode: true,
+      licenceKey: widget.licenceKey,
+      forceEdgeOverlay: false,
+      captureTimeout: const Duration(seconds: 3),
+      overlayColor: Colors.teal,
+      onLicenceRequired: () { /* Display your renewal/help UI. */ },
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: controller.trigger,
+      child: const Icon(Icons.camera_alt),
+    ),
+  );
+}
+```
+
+The host owns and disposes the flash notifier. The controller has no dispose
+method. `trigger()` requests capture; permission, readiness and licence checks
+still apply. The callback returns `AresIdentityImage`, rather than the supplied
+route's processed tuple. Your app runs recognition/redaction explicitly.
+See [embedded controls and lifecycle](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md).
+
+## Platform requirements
+
+Android API 24+, iOS 16+, Flutter 3.44+, Dart 3.12+. The example tooling requires
+Dart 3.13.4+. The protected shared AresEdge camera must support the Identity
+licence protocol and authority required by the candidate. Use its verified
+dependency configuration; an older hosted camera core is insufficient.
+The current Identity candidate uses CocoaPods on iOS. Only one SDK camera can be
+active at a time. See [platform setup](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/platforms.md).
+
+## Document extraction and redaction
+
+Camera captures extract the detected document and correct perspective. The
+supplied route applies the selected privacy treatment to that crop. The embedded
+camera exposes `bytes`, `isDocumentCropped` and optional `width`/`height`; set
+`extractDocument: false` only for a host-controlled full-frame processing flow.
+
+`recogniseIdentity` runs Latin OCR on device and analyses fields. `analyseIdentity`
+accepts existing recognized text with matching upright image dimensions.
+`AresIdentityAnalysis.redact` creates a new JPEG with solid masks. Policies and
+masking run in the compiled native Identity core. The SDK does not automatically
+upload images or prove document authenticity or a person's identity.
+See [recognition and redaction](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/recognition-and-redaction.md).
+
+### Supported public API
+
+Import `package:ares_identity/ares_identity.dart` for `AresIdentityScreen`,
+`AresIdentityScanResult`, `AresIdentityRedactionLevel`,
+`IdentityIntelligenceScanStreamer`, `LiveIdentityEdgeScanController`,
+`IdentityScanState`, `AresIdentityImage`, `AresIdentityAnalysis`,
+`recogniseIdentity`, `analyseIdentity` and the documented models/policies.
+Internal helper paths, owner integrations and native channels are private.
+See the [API reference](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/api-reference.md).
+
+A commercial licence is required for production use. Downloading documentation,
+examples or compiled binaries does not grant a free production licence.
+See [LICENSE](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/LICENSE). Third-party components retain their own terms.
