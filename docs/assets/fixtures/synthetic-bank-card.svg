@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 700 400">
+ <rect x="2" y="2" width="696" height="396" rx="22" fill="#f4f4f1" stroke="#fff" stroke-width="4"/>
+ <g fill="#101010" font-family="Arial, sans-serif">
+  <text x="40" y="64" font-size="28" font-weight="700">SANDBOX BANK CARD</text>
+  <text x="660" y="64" text-anchor="end" font-size="28" font-weight="700">VISA</text>
+  <rect x="40" y="100" width="70" height="52" rx="9" fill="#d4c696" stroke="#333" stroke-width="2"/>
+  <text x="40" y="202" font-family="monospace" font-size="38" letter-spacing="2">4111 1111 1111 1111</text>
+  <text x="40" y="254" font-size="22">TEST CARDHOLDER</text>
+  <text x="660" y="254" text-anchor="end" font-size="22">VALID THRU 12/30</text>
+  <text x="40" y="302" font-size="16">TEST ONLY — NOT A PAYMENT CARD</text>
+ </g>
+</svg>
