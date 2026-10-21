@@ -6,6 +6,10 @@ route uses the AresScan identity layout: black back/torch buttons, privacy-level
 controls, Redact/Analyse selection, stable status hints and a fixed animated
 capture guide. It never opens or includes an image editor.
 
+See [scanner and result screenshots](visual-demos.md) for a synthetic-card example.
+
+<img src="assets/screenshots/identity-scanner.png" alt="Supplied AresIdentity scanner detecting a synthetic bank card" width="280">
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:ares_identity/ares_identity.dart';

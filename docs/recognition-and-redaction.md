@@ -48,3 +48,9 @@ Pass the same Identity key to recogniseIdentity/analyseIdentity as to the camera
 Native policy uses OCR element and line geometry. Label/value layouts may mask whole lines and nearby values, so review the suggested regions. When a passport MRZ is not recognized, the bottom 28 percent is masked as a precaution. Generic document types use heuristic identifier/date matches. These heuristics do not establish document authenticity, complete PII discovery or a certified redaction result.
 
 Inputs are limited to 20 million image pixels and 50 MB encoded images; analysis also bounds OCR text and geometry counts. Unsupported or invalid input raises a platform error. Rectangles and dimensions must refer to the same upright pixels.
+
+## Example result
+
+[View the cropped, redacted synthetic card](visual-demos.md#cropped-image-after-redaction).
+The screenshot shows AresScan+ displaying returned image bytes; its surrounding
+editor and export controls belong to that host app.

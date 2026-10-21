@@ -35,6 +35,25 @@ The route's enum is `none`, `minimal`, `balanced` or `strict`; Analyse or no
 identified masking regions returns `none`. The enum is a policy label, not a
 claim that OCR found all sensitive fields.
 
+## See the scanner and redacted result
+
+| Identity capture | Redacted image in AresScan+ |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/main/docs/assets/screenshots/identity-scanner.png" alt="AresIdentity scanner with Minimal privacy selected and a synthetic bank card detected" width="280"> | <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/main/docs/assets/screenshots/redacted-card-aresscan.png" alt="Cropped synthetic bank card with its number masked, displayed by the AresScan+ host app" width="280"> |
+
+The scanner offers Minimal, Balanced and Strict privacy levels, Redact/Analyse
+modes, document-state hints and an animated capture guide. The result screenshot
+shows the synthetic card number covered by a solid mask; the cardholder and
+expiry remain visible in this example.
+
+**The result is displayed in AresScan+, the host application.** Its editor,
+Save/Share controls, Pages and AI Tools are application features. The
+AresIdentity supplied route returns the cropped, privacy-treated image bytes
+and applied-level enum directly to your app; it does not open an editor.
+
+[View the screenshot guide](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md)
+· [Download synthetic test documents](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
+
 ## Capture, review and redact
 
 ```dart
@@ -58,6 +77,7 @@ All licence tests in this project use sandbox keys. Production issuer pins remai
 
 - [Getting Started](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/getting-started.md)
 - [Platforms](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/platforms.md)
+- [Screenshots and Result Examples](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/visual-demos.md)
 - [Scanner Screen](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/scanner-screen.md)
 - [Embedded Camera](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md)
 - [Recognition And Redaction](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/recognition-and-redaction.md)
