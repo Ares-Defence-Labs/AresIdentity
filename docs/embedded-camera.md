@@ -48,3 +48,15 @@ Set `flash.value` to request torch state. The host owns and disposes that notifi
 With `isManualMode: false`, stable document detection can start automatic capture. On trial expiry the embedded camera becomes a white licence-required view. Remounting it does not restart the native process trial.
 
 `extractDocument: true` (default) requires a detected boundary and returns a perspective-corrected document. Set false to return a full camera frame for a host-controlled processing flow; check isDocumentCropped on the result. Camera QA can use full-frame capture without requiring a physical sample document.
+
+
+### Detection feedback and guide animation
+
+Identity capture leaves the detected document unobscured: its native polygon,
+tint, grid and document-following countdown trace are hidden. Detection and
+automatic capture still run normally. A host can draw a fixed guide using
+`onScanStateChanged`: `IdentityScanState.documentDetected` controls its active
+appearance, and `phase`/`remainingSeconds` drive countdown feedback. Do not use
+`showHint` to infer document presence; a searching hint can be visible while no
+document is detected. Brief holding/searching noise is smoothed for presentation;
+native countdowns and capture authorization remain authoritative.
