@@ -1,32 +1,32 @@
-# Release status and verification gates
+# AresIdentity v2.0.0
 
-Status on 21 October 2026: private source SDK in development. No public ares_identity customer package has been published. The compiled protected customer candidate passed 5/5 physical tests on Galaxy S24 and 5/5 on iPhone 13, including native OCR/redaction and sandbox-licensed processing/capture after trial expiry. Three AresScan integration tests, twelve sanitized native policy cases and nineteen website documentation/link/catalogue tests also pass. A real US$600 Stripe sandbox purchase (renewal off) subsequently issued a key that passed eight offline native checks and the five-test physical suite on each device. The coordinated hosted Edge release remains gated.
+Release date: 22 October 2026. This is a self-contained customer SDK with its own
+compiled camera, Identity licence verifier and encrypted model. It has no
+`ares_edge` dependency. The source model is `ares_identity_inferencer.onnx`;
+customer resources are authenticated `ares_identity_inferencer.aem` files.
 
-SDK publication is disabled in source package metadata, repository variables and release configuration. Changelog/branch/tag governance follows the Edge concept. Public documentation can describe implemented APIs, but must not claim a package version or downloadable artifact exists before it is verified.
+## Verification scope
 
-Before enabling sales/publication: resolve private path dependencies into supported customer artifacts; verify native Identity product enforcement and sandbox-key rejection by release trust; run device tests against the exact artifact; validate docs examples and notices; check dry-run package contents for source/secrets/models policy; pass both repository checks and review the release. Live paid-licence verification is not claimed when only sandbox payments were used.
+Local Android and unsigned iOS profile consumers build successfully, both alone
+and with Edge installed. Package security/metadata checks, native model-container
+checks, Dart tests, sanitized policy tests and sandbox-paid native licence checks
+pass. Production trust rejects sandbox keys. No production payment or
+production customer-key test was performed.
 
+Earlier physical capture tests covered the preceding Edge-backed edition.
+Fresh physical validation of the independent native binaries, repeated camera
+handover and the historical Android camera-buffer warning remain outstanding.
+Successful linking is not proof of simultaneous camera behavior; keep one
+scanner active at a time. Broader billing regression fixtures also require
+follow-up independently of the passing Identity-specific checkout tests.
 
-AresScan owner integration also passed on both physical devices with a sandbox
-six-SDK admin fixture, including protected model initialization, real trial expiry,
-native processing and compact/ad controls. Its final 12 layout/configuration tests
-and nine SDK Dart tests pass. See `physical-device-testing.md` for the separate
-full-app evidence and model-delivery corrections. Normal owner configuration is
-issued, while all native licence QA remains sandbox-only. Publication stays disabled.
+## Commercial access
 
+Package publication does not enable live checkout automatically. Sandbox and
+production Stripe products are configured separately. Production entitlement
+must be issued by Ares Defence Labs; test keys are restricted to isolated QA
+builds and are rejected by this release.
 
-The supplied AresScan-style route subsequently passed consecutive Strict Redact
-and Analyse captures on both physical devices with sandbox owner keys. Each
-returned the cropped image/level tuple after the configured three-second native
-countdown, without an editor; Strict output masking was checked in decoded pixels.
-The iPhone run used a fresh process and the corrected local scanner core. The
-correction makes precise corners and explicit confidence independent of model
-output dictionary order, matching Android's fallback precedence. Normal app builds
-were restored after QA; native licence tests remained sandbox-only.
-
-This route update also passed 25 SDK Dart tests, source/customer-candidate analysis,
-responsive checks at 200% text size, six website documentation tests, sixteen Swift
-scan/display/ownership cases, all six model-output permutations plus fallback
-cases, thirteen JVM policy tests and two Dart camera teardown tests. API/example
-checks passed. These local results do not enable package publication or replace
-review of the coordinated protected Edge core release.
+The SDK is proprietary, OCR/redaction is heuristic, and encryption cannot defeat
+a host that controls its process. See [licensing](licensing.md) and
+[security boundaries](security-and-assets.md).

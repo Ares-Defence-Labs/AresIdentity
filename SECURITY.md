@@ -15,9 +15,11 @@ host-controlled restart. No public API can replace an issuer pin.
 
 ## Protected artifacts
 
-AresIdentity inherits AresEdge's authenticated encrypted camera model. It ships
-compiled Identity processing with public Dart/registration adapters rather than
-private processing algorithms or a second model. Android uses an in-memory model
+AresIdentity owns its authenticated encrypted camera model and compiled scanner.
+Its protection follows the same design as AresEdge, without an `ares_edge`
+dependency. Private source uses `ares_identity_inferencer.onnx`; distribution
+uses `ares_identity_inferencer.aem`. Compiled processing and thin registration
+adapters keep private algorithms out of the customer source. Android uses an in-memory model
 buffer; the current iOS loader removes its protected staging file after session
 creation/error. Encryption and stripping resist casual extraction; a host that
 controls the process can still inspect or patch binaries and memory.
@@ -26,7 +28,7 @@ Public branding, screenshots and synthetic fixtures remain readable and are
 inventoried separately from runtime model assets. Hash receipts detect changes
 relative to the reviewed files, but are not signatures or proof of provenance.
 See [model and asset security](docs/security-and-assets.md) for packaging controls,
-limitations and the pending coordinated Edge release.
+limitations and standalone release verification gates.
 
 ## Document privacy
 

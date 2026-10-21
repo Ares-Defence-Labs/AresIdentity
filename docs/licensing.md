@@ -1,6 +1,6 @@
 # Licensing, renewal and sandbox verification
 
-AresIdentity is configured at **US$600 per twelve-month term**, equivalent to US$50/month billed annually, matching AresEdge. A signed customer licence covers the customer's apps on supported Android/iOS platforms. Stripe live and test product records exist; public package availability and live checkout remain release-gated.
+AresIdentity is configured at **US$600 per twelve-month term**, equivalent to US$50/month billed annually, matching AresEdge. A signed customer licence covers the customer's apps on supported Android/iOS platforms. Stripe live and test product records exist; package publication and live checkout are managed separately. Contact Ares Defence Labs for live licence availability.
 
 ## Configure your application
 

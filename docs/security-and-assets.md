@@ -1,14 +1,16 @@
 # Model, asset and distribution security
 
-## Shared encrypted camera model
+## Independent encrypted camera model
 
-AresIdentity uses the protected AresEdge camera and its bundled model. It does
-not ship a second ONNX model, a separate model URL or a public decryption API.
-The approved Edge customer artifact uses authenticated AES-256-GCM `.aem`
-containers. Android reads decrypted model bytes into a direct memory buffer.
-The current iOS ONNX Runtime interface requires a protected temporary file,
-which the native loader removes after session creation or a loading error.
-Corrupted/truncated containers and cleartext model replacements are rejected.
+AresIdentity owns its camera, native licence verifier and model loader. It has no
+runtime `ares_edge` dependency and uses the same authenticated AES-256-GCM design
+as AresEdge. The private source model is `ares_identity_inferencer.onnx`.
+Customer Android and iOS artifacts each contain one encrypted
+`ares_identity_inferencer.aem`, never the raw ONNX file or a public decryption API.
+Android loads decrypted weights through a direct memory buffer. The current iOS
+ONNX Runtime interface requires a protected temporary file, removed after session
+creation or a loading error. Corrupted/truncated containers and cleartext model
+replacements are rejected.
 
 The encryption key is embedded in compiled native code for offline use. Someone
 controlling the host process can inspect or patch the binary, recover a key or
@@ -18,7 +20,7 @@ relative to a reviewed snapshot; they are not publisher signatures.
 
 AresScan's owner/store-delivery configuration is separate. Do not copy its raw
 store assets, owner entitlement or private model-delivery configuration into a
-customer package. Customer builds inherit the protected Edge resource.
+customer package. Customer builds carry the Identity encrypted resource.
 
 ## Identity processing and licensing
 
@@ -42,18 +44,17 @@ that editor is not part of AresIdentity.
 
 ## Customer package checks
 
-Local assembly requires hashed Android/iOS Identity binaries and the exact
-protected Edge artifact used for review. Auditing rejects plaintext model files,
-including inside nested AAR/JAR archives; unexpected implementation source;
-private helpers and paths; credential-shaped material; unsafe archive paths;
-symlinks; extra/unreceipted files; and changed reviewed documentation assets.
-Identity rejects even an encrypted model copy of its own: it must inherit Edge's.
+Standalone assembly requires hashed Identity camera and processing binaries.
+Auditing rejects raw model files, including inside nested AAR/JAR archives;
+unexpected implementation source; private helpers and paths; credential-shaped
+material; unsafe archive paths; symlinks; extra/unreceipted files; and changed
+reviewed documentation assets. Exactly one correctly named encrypted model per
+platform is required. No `ares_edge` package dependency or imports are permitted.
 
-Local checks do not assert that an unreleased hosted dependency exists. The
-current Edge review artifact still identifies itself as 2.1.1; Identity needs the
-coordinated compatible release (currently targeted at 2.1.2). Its version mismatch
-is recorded explicitly. Rebuild/audit the final dependency and repeat physical
-checks against the exact final artifacts before approving any release.
+The standalone migration changes the native artifacts. Earlier Edge-backed
+physical results remain historical evidence and do not validate these new
+binaries. Recheck authenticated readers, native licence isolation, host linking,
+camera capture and package contents before publishing the independent SDK.
 
 ## Document privacy
 
