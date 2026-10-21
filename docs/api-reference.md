@@ -1,6 +1,6 @@
 # Public API reference
 
-Import `package:ares_identity/ares_identity.dart`. The current API belongs to the private source edition; customer distribution is not published yet. Internal src paths and native method-channel names are not supported integration APIs.
+Import `package:ares_identity/ares_identity.dart`. These APIs are available in the local customer candidate; hosted distribution is not published yet. Internal src paths and native method-channel names are not supported integration APIs.
 
 | API | Contract |
 | --- | --- |

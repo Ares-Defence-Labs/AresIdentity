@@ -1,23 +1,44 @@
-# Runnable example and verification
+# Example application
 
-The private SDK contains an example app under example/. It opens the ready-made scanner, displays captured pixels, analyses sensitive fields and previews a redacted image. Its image processing is local. Supply a development signing team for iOS and grant camera access.
+The approved local customer candidate includes `example/` for capture, on-device
+sensitive-field analysis and redacted-image preview. The example app owns its
+preview and save controls. The supplied SDK route returns cropped image bytes
+and an applied-level enum without opening an editor.
+
+## Run on a physical device
+
+From the local customer package, open `example/`. If Android/iOS host folders
+are absent, run `flutter create --platforms=android,ios .` there first, then
+apply the platform permission/minimum-OS/signing setup below.
 
 ```sh
 cd example
 flutter pub get
-flutter run -d <physical-device-id>
+flutter devices
+flutter run -d <physical-device-id> --dart-define=ARES_IDENTITY_LICENCE=YOUR_PORTAL_ISSUED_KEY
 ```
 
-From the SDK root:
+Configure [platform permissions and signing](platforms.md), grant camera access
+and use the candidate's verified native dependencies. For iOS, choose your host
+app's development team and provisioning profile. Omitting a key uses the shared
+native 60-second trial. Sandbox keys require an isolated sandbox-trusted candidate.
 
-```sh
-flutter analyze
-flutter test test packages/ares_identity_core/test
-cd example
-flutter test test/widget_test.dart
-flutter test integration_test/identity_device_test.dart -d <physical-device-id> --timeout 5m
-```
+## Exercise both integrations
 
-The integration harness uses physical camera/platform channels and on-device OCR with generated synthetic documents. It checks capture/disposal, malformed key rejection, classification, black masking and the real 60-second trial. It deletes synthetic OCR files and reports only dimensions/counts/states. It does not issue a valid customer licence or validate a paid checkout.
+1. Open the [supplied scanner](scanner-screen.md), select a privacy level and
+   capture the [synthetic bank card](test-fixtures.md).
+2. Review the cropped pixels and returned `level`. Repeat in Analyse mode, which
+   returns unmasked bytes and `none`.
+3. Reopen the scanner; check torch, back navigation, privacy policies and countdown.
+4. Use [embedded camera controls](embedded-camera.md) when composing your own UI
+   and recognition/redaction flow.
 
-On 21 October 2026 the earlier source example passed 4/4 physical tests on Galaxy S24 and 4/4 on iPhone 13, with its then-current SDK/core regressions. Subsequent host-integration or native-binary changes require their own verification. See [performance and testing](performance-testing.md).
+## Verify your integration
+
+Exercise permission denial/retry, background/foreground, disposal and repeated
+scans. Keep the entire card large and in focus within the guide; monitor moiré can
+interfere with detection. Review masked pixels before sharing. See
+[performance and device checks](performance-testing.md) for a repeatable matrix.
+
+The customer candidate is not a hosted release. Example results do not replace
+final artifact verification or enable publication. See [release status](release-status.md).
