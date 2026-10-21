@@ -25,10 +25,15 @@ Open **AresIdentityScreen** for the supplied AresScan-style scanner, or use
 The supplied route returns the cropped image after the selected privacy treatment
 and an enum describing the applied level. Your app handles the result.
 
-**Current availability:** the customer package is not published. SDK publication
-and live checkout remain disabled pending final artifact verification. This
-repository provides documentation and support, rather than a Git dependency or
-the SDK implementation. See [release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md).
+**Package:** `ares_identity` v2.0.0 is a self-contained Android/iOS SDK.
+Install it from pub.dev; the GitHub repository provides documentation and support,
+rather than the SDK implementation. No `ares_edge` package or Edge licence is
+required. See [release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md).
+
+```yaml
+dependencies:
+  ares_identity: ^2.0.0
+```
 
 ## Choose your scanner integration
 
@@ -143,7 +148,8 @@ See [example setup](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/
 Supply the full signed AID2 customer key authorizing AresIdentitySDK, rather than
 a portal licence ID or another SDK's key. End users do not enter licence keys.
 The configured fee matches AresEdge: US$600 per twelve-month term. Live checkout
-remains disabled until release verification completes.
+is managed separately from package publication; contact Ares Defence Labs for
+production licence availability.
 
 ```dart
 const licenceKey = String.fromEnvironment('ARES_IDENTITY_LICENCE');
@@ -252,8 +258,10 @@ See [embedded controls and lifecycle](https://github.com/Ares-Defence-Labs/AresI
 
 ## Model and asset protection
 
-AresIdentity inherits AresEdge's authenticated encrypted camera model; it does
-not bundle another raw ONNX file. Native processing is compiled, and public
+AresIdentity is self-contained: its camera and authenticated encrypted model
+ship inside this SDK, with no `ares_edge` dependency. The private source model
+is `ares_identity_inferencer.onnx`; customer artifacts contain only
+`ares_identity_inferencer.aem`. Native processing is compiled, and public
 Dart adapters expose the documented API. Branding, screenshots and synthetic
 fixtures are readable documentation assets, not registered runtime model assets.
 Reviewed asset inventories and whole-package hashes detect unexpected changes.
@@ -264,9 +272,8 @@ the process from inspecting binaries or decrypted memory. See
 ## Platform requirements
 
 Android API 24+, iOS 16+, Flutter 3.44+, Dart 3.12+. The example tooling requires
-Dart 3.13.4+. The protected shared AresEdge camera must support the Identity
-licence protocol and authority required by the candidate. Use its verified
-dependency configuration; an older hosted camera core is insufficient.
+Dart 3.13.4+. Identity includes its own camera, native product verifier and
+processing core. No separate AresEdge package or licence is required.
 The current Identity candidate uses CocoaPods on iOS. Only one SDK camera can be
 active at a time. See [platform setup](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/platforms.md).
 

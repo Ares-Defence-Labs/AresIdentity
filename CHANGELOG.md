@@ -1,10 +1,18 @@
 # Changelog
 
-## Unreleased
+## 2.0.0 — 22 October 2026
 
-- Document encrypted shared-camera model, compiled native processing, reviewed public assets and final dependency-release verification boundaries for the upcoming package.
+- Make AresIdentity self-contained with its own compiled camera, Identity product verifier, encrypted model loader and private `ares_identity_inferencer.onnx`; customer packages contain only `ares_identity_inferencer.aem` and no `ares_edge` dependency.
+- Remove inherited editor/filter components, isolate native channels and obfuscated classes for coexistence with Edge, and prevent rejected expired/future keys from replacing valid cached Identity access.
+- Verify standalone Android/iOS customer builds, mixed-SDK linking, native sandbox/production key isolation, authenticated model readers and package security/metadata; retain publication and live-checkout guards for user validation of the new binaries.
 
-- Follow the AresEdge documentation structure with branded README, integration choices, app badges, screenshot workflows, licence setup, customer examples and branding/media folders. Retain the existing verification guides and unpublished release status.
+- Prepare package-page screenshot metadata and document encrypted shared-model/native-processing boundaries; audit exact customer/Edge artifacts, nested archives, reviewed public assets and whole-package hashes while retaining disabled publication and recording the pending compatible Edge release.
+
+- Align customer documentation with AresEdge: branded README, integration choices, app badges, licence setup, screenshot workflows and runnable examples; add branding/media package assets while retaining source setup separately.
+
+- Pin package README screenshots to the reviewed public documentation commit so image previews render before merge and remain stable across documentation updates.
+
+- Add supplied scanner and redacted synthetic-card screenshots to repository guides and the package README, clarify host-app editor features, and include documentation image assets in local customer packages.
 
 - Verify consecutive supplied-route Redact/Analyse captures on iPhone 13 and Galaxy S24; add synthetic bank-card and driver-licence documentation PNGs.
 - Coordinate the iOS scanner-core fix that prioritizes precise model corners and explicit confidence over heatmap fallback independently of output order.
@@ -34,4 +42,4 @@
 
 - Provide the AresScan-style standalone route with selected native privacy treatment, a typed applied-level/image-bytes record, configurable guide color, state hints and native stable-document countdown (1–10 seconds), while retaining the embedded camera and avoiding an editor. Clear active feedback on capture errors and safely retire native camera ownership when routes close.
 
-AresIdentity v0.0.1
+AresIdentity v2.0.0

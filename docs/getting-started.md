@@ -4,24 +4,21 @@ AresIdentity captures identity documents, locates sensitive fields with on-devic
 
 ## Obtain the package
 
-The customer package has not been published. Live checkout and SDK publication
-remain disabled until final verification. Obtain an approved local compiled
-customer candidate for evaluation. This repository contains documentation and
-support, not the SDK implementation; do not use a Git dependency pointing at it.
+Install the self-contained package from pub.dev. The GitHub repository holds
+documentation and support, so do not use a Git dependency pointing at it. No
+separate Edge SDK is required.
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  ares_identity:
-    path: /absolute/path/to/approved-customer-package
+  ares_identity: ^2.0.0
 ```
 
 Run `flutter pub get`, configure [Android and iOS](platforms.md), and fully
 rebuild after changing native binaries. Hot reload cannot update native licence
 verification. Use Flutter 3.44+, Dart 3.12+; example tooling uses Dart 3.13.4+.
-Use the candidate's verified dependencies. Once a release is approved, use its
-announced hosted version instead of the local path; none is announced yet.
+Use the package's hosted dependencies; do not copy private source overrides into customer apps.
 
 ## Ready-made scanner
 
@@ -64,4 +61,4 @@ result semantics](scanner-screen.md).
 
 Provide your application's signed Identity licence from private build configuration. Missing/invalid keys use the 60-second process trial. See [licensing](licensing.md), including isolated sandbox testing.
 
-The current Identity adapter requires a compatible AresEdge build with Identity licence protocol 2 and native authority ABI 1. The next compatible hosted release is pending; a pub.dev dependency alone cannot supply that unreleased capability today. Internal QA uses a guarded local override. Customer installation instructions will name the verified hosted versions when the release is approved.
+AresIdentity includes its own compiled scanner, model loader and Identity licence verifier. It does not depend on `ares_edge`; no separate Edge key or installation is required. Version 2.0.0 includes the protected native camera and processing implementation.
