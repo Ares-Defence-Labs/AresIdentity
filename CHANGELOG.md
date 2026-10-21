@@ -19,4 +19,12 @@
 
 - Verify a US$600 Stripe sandbox-paid Identity key offline and on both physical devices with renewal off; keep coordinated publication and live checkout gated.
 
+- Exclude local guarded native-review dependency overrides from source control.
+
+- Record full AresScan sandbox owner validation on Android and iPhone, including protected model readiness, post-trial native redaction, invalid-input rejection, and compact controls above ads.
+
+- Hide the document-following overlay for Identity capture and expose stable detection/countdown feedback separately from hint visibility, preventing idle guide activation and rapid hint flicker.
+
+- Provide the AresScan-style standalone route with selected native privacy treatment, a typed applied-level/image-bytes record, configurable guide color, state hints and native stable-document countdown (1–10 seconds), while retaining the embedded camera and avoiding an editor. Clear active feedback on capture errors and safely retire native camera ownership when routes close.
+
 AresIdentity v0.0.1

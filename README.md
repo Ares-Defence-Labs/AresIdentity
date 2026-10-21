@@ -18,13 +18,30 @@ dependencies:
 
 Use Flutter 3.44+ / Dart 3.12+; the example/documentation tools use Dart 3.13.4+. The compiled shared native core must advertise Identity licence protocol 2, AID2 support and native authority ABI 1. Older hosted Edge binaries cannot validate Identity keys; the SDK reports an actionable compatibility message. Local native candidates are development overrides, not published release versions.
 
+## Two scanner integrations
+
+1. **Supplied activity-style route:** `AresIdentityScreen.open(context, ...)`
+   presents the AresScan-style Identity UI, applies the selected privacy
+   treatment, and returns `({AresIdentityRedactionLevel level, Uint8List bytes})`.
+   The image is cropped; no image editor is opened. Cancellation returns null.
+   Set the guide color, state-based hints and native stable-document countdown
+   (`captureTimeout`, whole seconds 1–10; default 2) without rebuilding the layout.
+2. **Embedded scanner:** `IdentityIntelligenceScanStreamer` supplies the camera
+   and native capture behavior. Your app owns the controls, layout, hints and
+   subsequent recognition/redaction workflow.
+
+Both integrations use the same protected camera and Identity licensing.
+The route's enum is `none`, `minimal`, `balanced` or `strict`; Analyse or no
+identified masking regions returns `none`. The enum is a policy label, not a
+claim that OCR found all sensitive fields.
+
 ## Capture, review and redact
 
 ```dart
 import 'package:ares_identity/ares_identity.dart';
 
-// Mount AresIdentityScreen or IdentityIntelligenceScanStreamer.
-// Its callback receives AresIdentityImage with immutable image.bytes.
+// AresIdentityScreen.open returns the processed level/bytes tuple.
+// The embedded callback receives AresIdentityImage with cropped image.bytes.
 // Analyse the exact upright captured pixels, present regions for review,
 // then call analysis.redact(image.bytes) to produce a new JPEG.
 ```

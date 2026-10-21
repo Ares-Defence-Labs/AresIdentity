@@ -1,5 +1,9 @@
 # Embedded camera and custom controls
 
+Use this entry point when your app supplies the UI and chooses when to run OCR
+and redaction. For the SDK-supplied AresScan-style UI and processed result tuple,
+use `AresIdentityScreen.open` instead. Both share the same protected native camera.
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:ares_identity/ares_identity.dart';
@@ -30,6 +34,7 @@ class _IdentityCameraState extends State<IdentityCamera> {
       isManualMode: true,
       licenceKey: widget.licenceKey,
       forceEdgeOverlay: false,
+      captureTimeout: const Duration(seconds: 3),
       overlayColor: Colors.teal,
       onLicenceRequired: () { /* Display your renewal/help UI. */ },
     ),
@@ -43,7 +48,7 @@ class _IdentityCameraState extends State<IdentityCamera> {
 
 Mount the camera in a visible, bounded layout. Its visibility lifecycle starts and suspends the native camera. Early capture can precede the first camera frame; wait for readiness/status and allow the user to retry. Capture failures produce a status rather than an image.
 
-Set `flash.value` to request torch state. The host owns and disposes that notifier. The controller has no dispose method. `trigger()` requests capture; `cancelTimer()` cancels an automatic countdown. `triggerIdentityChange(mode)` stores an application-selected `redact` or `analyse` mode; the camera callback still returns image bytes, so the host performs analysis/redaction explicitly.
+Set `flash.value` to request torch state. The host owns and disposes that notifier. The controller has no dispose method. `trigger()` requests capture; `cancelTimer()` invokes an explicitly host-bound cancellation action; it does not cancel the native automatic countdown. `triggerIdentityChange(mode)` stores an application-selected `redact` or `analyse` mode; the camera callback still returns image bytes, so the host performs analysis/redaction explicitly.
 
 With `isManualMode: false`, stable document detection can start automatic capture. On trial expiry the embedded camera becomes a white licence-required view. Remounting it does not restart the native process trial.
 
@@ -60,3 +65,5 @@ appearance, and `phase`/`remainingSeconds` drive countdown feedback. Do not use
 `showHint` to infer document presence; a searching hint can be visible while no
 document is detected. Brief holding/searching noise is smoothed for presentation;
 native countdowns and capture authorization remain authoritative.
+
+`captureTimeout` configures the native automatic countdown (whole seconds 1–10; default 2). Manual `trigger()` captures immediately when ready and still enforces native licensing/document extraction.

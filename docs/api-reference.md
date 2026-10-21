@@ -4,8 +4,10 @@ Import `package:ares_identity/ares_identity.dart`. The current API belongs to th
 
 | API | Contract |
 | --- | --- |
-| AresIdentityScreen | Ready-made route; requires onCapture. Optional licenceKey, overlayColor, forceEdgeOverlay=false. Host dismisses after accepting capture. |
-| IdentityIntelligenceScanStreamer | Embedded camera. Two positional callbacks: status string and AresIdentityImage capture. Required showHint and flashOn. Optional controller, isManualMode=false, licenceKey, forceEdgeOverlay=false, overlayColor, onLicenceRequired, extractDocument=true. |
+| AresIdentityScreen | Supplied AresScan-style route. open(context, licenceKey, overlayColor, hintBuilder, captureTimeout=Duration(seconds:2), onAnalysis, forceEdgeOverlay=false) returns Future<AresIdentityScanResult?>. Direct routes optionally accept onComplete or the older onCapture callback, which owns dismissal. No editor. |
+| AresIdentityScanResult | Named record ({AresIdentityRedactionLevel level, Uint8List bytes}); cropped image after selected treatment. |
+| AresIdentityRedactionLevel | none, minimal, balanced, strict. none for Analyse or no identified masking regions. Policy label, not a completeness guarantee. |
+| IdentityIntelligenceScanStreamer | Embedded camera. Two positional callbacks: status string and AresIdentityImage capture. Required showHint and flashOn. Optional controller, isManualMode=false, licenceKey, forceEdgeOverlay=false, overlayColor, onLicenceRequired, extractDocument=true, captureTimeout=Duration(seconds:2) (whole seconds 1–10). |
 | LiveIdentityEdgeScanController | trigger(), cancelTimer(), triggerIdentityChange(mode), readable identityMode. |
 | IdentityIntelligenceMode | redact, analyse. Application mode; it does not itself run OCR or masking. |
 | IdentityLevelAggressionMode | lowAggression, balancedAggression, maxAggression. |
