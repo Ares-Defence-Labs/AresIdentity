@@ -26,3 +26,5 @@ All tested keys for this project must be sandbox keys, as requested by the owner
 A sandbox key works only in a clearly isolated sandbox-trusted QA build. Prepare that copy outside the release checkout, use a distinct application ID/label, keep publish_to:none and publication disabled, and verify the release pins are unchanged. Never add a runtime test-key bypass to production binaries. Never publish sandbox-trusted artifacts.
 
 A locally signed sandbox fixture can test cryptographic/date behavior without payment, but it does not prove checkout/webhook issuance. A sandbox-paid licence additionally verifies the test payment → signed webhook → paid term → AID2 issuance path. Report those two evidence types separately.
+
+On 21 October 2026 a US$600 Stripe sandbox purchase with renewal off issued an Identity key valid until 21 October 2027. It passed eight offline native trust checks and the protected-package five-test suite on Galaxy S24 and iPhone 13. No production customer key or real payment was used.
