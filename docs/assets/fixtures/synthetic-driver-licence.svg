@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1008" viewBox="0 0 1000 630">
+ <defs>
+  <clipPath id="card"><rect x="2" y="2" width="996" height="626" rx="30"/></clipPath>
+  <linearGradient id="paper" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e9f1f3"/></linearGradient>
+ </defs>
+ <g clip-path="url(#card)">
+  <rect width="1000" height="630" fill="url(#paper)"/>
+  <g fill="none" stroke="#c9dce3" stroke-width="2" opacity=".65">
+   <path d="M-40 495 Q350 120 1050 490 M-40 515 Q350 140 1050 510 M-40 535 Q350 160 1050 530 M-40 555 Q350 180 1050 550"/>
+  </g>
+  <rect width="1000" height="120" fill="#173f59"/>
+  <g font-family="Arial, sans-serif">
+   <text x="40" y="42" fill="#b8dbe9" font-size="20" letter-spacing="3">SAMPLE TERRITORY</text>
+   <text x="40" y="88" fill="#fff" font-size="38" font-weight="700">DRIVER LICENCE</text>
+   <text x="955" y="75" text-anchor="end" fill="#b8dbe9" font-size="20" font-weight="700">TEST FIXTURE</text>
+   <rect x="40" y="166" width="214" height="282" rx="14" fill="#d8e5eb"/>
+   <circle cx="147" cy="256" r="53" fill="#7b99a7"/>
+   <path d="M62 432v-37c0-52 38-81 85-81s85 29 85 81v37" fill="#547b8f"/>
+   <text x="147" y="478" text-anchor="middle" fill="#617485" font-size="16" letter-spacing="1">SAMPLE PORTRAIT</text>
+   <g fill="#617485" font-size="15" letter-spacing="1.5">
+    <text x="294" y="158">NAME</text><text x="294" y="233">LICENCE NUMBER</text>
+    <text x="294" y="307">DATE OF BIRTH</text><text x="640" y="307">EXPIRY DATE</text>
+    <text x="294" y="381">CLASS</text><text x="640" y="381">ISSUER</text>
+    <text x="294" y="453">ADDRESS</text>
+   </g>
+   <g fill="#173041" font-size="31">
+    <text x="294" y="194" font-weight="700">ALEX SAMPLE</text>
+    <text x="294" y="269" font-family="monospace">TEST000042</text>
+    <text x="294" y="343">01/01/1990</text><text x="640" y="343">31/12/2030</text>
+    <text x="294" y="417">C</text><text x="640" y="417">TT</text>
+    <text x="294" y="488">123 SAMPLE ROAD</text><text x="294" y="526" font-size="27">TESTVILLE TT 0000</text>
+   </g>
+   <rect y="565" width="1000" height="65" fill="#173f59"/>
+   <text x="500" y="606" text-anchor="middle" fill="#fff" font-size="21" font-weight="700" letter-spacing="1">SYNTHETIC SAMPLE • NOT VALID FOR IDENTIFICATION</text>
+  </g>
+ </g>
+ <rect x="2" y="2" width="996" height="626" rx="30" fill="none" stroke="#fff" stroke-width="4"/>
+</svg>

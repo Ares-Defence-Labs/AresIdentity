@@ -9,3 +9,6 @@ Verify each sensitive rectangle against the exact upright input. Exercise indexe
 For licensing, use sandbox-issued keys in an isolated sandbox-trusted build. Check valid, tampered, wrong-product and expired cases; require production trust to reject all sandbox keys. For camera unlock, capture after the full trial has elapsed; signature preflight alone is insufficient evidence.
 
 The private source physical QA passed camera/OCR/redaction/trial suites on Galaxy S24/Android 16 and iPhone 13/iOS 26.7.1. Protected artifacts, minimum-supported devices, release-mode integration and sandbox-paid licences need separate recorded sign-off before release.
+
+
+Use the [synthetic test fixtures](test-fixtures.md) for repeatable screenshots and camera setup; keep the entire card large within the guide.

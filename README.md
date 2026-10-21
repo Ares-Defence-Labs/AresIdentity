@@ -65,6 +65,7 @@ All licence tests in this project use sandbox keys. Production issuer pins remai
 - [Licensing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/licensing.md)
 - [Example Project](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/example-project.md)
 - [Performance Testing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/performance-testing.md)
+- [Synthetic Test Fixtures](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
 - [Release Status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md)
 
 ## Verification and packaging

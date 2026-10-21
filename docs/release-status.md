@@ -13,3 +13,20 @@ native processing and compact/ad controls. Its final 12 layout/configuration tes
 and nine SDK Dart tests pass. See `physical-device-testing.md` for the separate
 full-app evidence and model-delivery corrections. Normal owner configuration is
 issued, while all native licence QA remains sandbox-only. Publication stays disabled.
+
+
+The supplied AresScan-style route subsequently passed consecutive Strict Redact
+and Analyse captures on both physical devices with sandbox owner keys. Each
+returned the cropped image/level tuple after the configured three-second native
+countdown, without an editor; Strict output masking was checked in decoded pixels.
+The iPhone run used a fresh process and the corrected local scanner core. The
+correction makes precise corners and explicit confidence independent of model
+output dictionary order, matching Android's fallback precedence. Normal app builds
+were restored after QA; native licence tests remained sandbox-only.
+
+This route update also passed 25 SDK Dart tests, source/customer-candidate analysis,
+responsive checks at 200% text size, six website documentation tests, sixteen Swift
+scan/display/ownership cases, all six model-output permutations plus fallback
+cases, thirteen JVM policy tests and two Dart camera teardown tests. API/example
+checks passed. These local results do not enable package publication or replace
+review of the coordinated protected Edge core release.
