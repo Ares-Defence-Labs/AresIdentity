@@ -103,7 +103,10 @@ original screenshots and the distinction between SDK and host-app features.
 ## Run the example application
 
 The customer candidate includes an `example/` app for capture, on-device analysis
-and redacted-image preview. Run it on a physical device:
+and redacted-image preview. If its platform host folders are absent, run
+`flutter create --platforms=android,ios .` from `example/` first. Configure the
+[platform permissions, minimum OS and signing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/platforms.md)
+before running it on a physical device:
 
 ```sh
 # From an approved local customer package:
@@ -130,6 +133,7 @@ See [example setup](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/
 - [Performance and device testing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/performance-testing.md)
 - [Example application](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/example-project.md)
 - [Synthetic bank card and driver licence](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/test-fixtures.md)
+- [Model, asset and distribution security](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/security-and-assets.md)
 - [Release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md)
 
 - [Report a bug or ask a question](https://github.com/Ares-Defence-Labs/AresIdentity/issues)
@@ -245,6 +249,17 @@ method. `trigger()` requests capture; permission, readiness and licence checks
 still apply. The callback returns `AresIdentityImage`, rather than the supplied
 route's processed tuple. Your app runs recognition/redaction explicitly.
 See [embedded controls and lifecycle](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md).
+
+## Model and asset protection
+
+AresIdentity inherits AresEdge's authenticated encrypted camera model; it does
+not bundle another raw ONNX file. Native processing is compiled, and public
+Dart adapters expose the documented API. Branding, screenshots and synthetic
+fixtures are readable documentation assets, not registered runtime model assets.
+Reviewed asset inventories and whole-package hashes detect unexpected changes.
+Encryption resists casual extraction but cannot prevent a host that controls
+the process from inspecting binaries or decrypted memory. See
+[security and asset boundaries](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/security-and-assets.md).
 
 ## Platform requirements
 

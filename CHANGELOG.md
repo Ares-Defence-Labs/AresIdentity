@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Document encrypted shared-camera model, compiled native processing, reviewed public assets and final dependency-release verification boundaries for the upcoming package.
+
 - Follow the AresEdge documentation structure with branded README, integration choices, app badges, screenshot workflows, licence setup, customer examples and branding/media folders. Retain the existing verification guides and unpublished release status.
 
 - Verify consecutive supplied-route Redact/Analyse captures on iPhone 13 and Galaxy S24; add synthetic bank-card and driver-licence documentation PNGs.

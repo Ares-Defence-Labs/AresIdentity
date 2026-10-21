@@ -7,7 +7,9 @@ and an applied-level enum without opening an editor.
 
 ## Run on a physical device
 
-From the local customer package:
+From the local customer package, open `example/`. If Android/iOS host folders
+are absent, run `flutter create --platforms=android,ios .` there first, then
+apply the platform permission/minimum-OS/signing setup below.
 
 ```sh
 cd example
