@@ -39,7 +39,7 @@ claim that OCR found all sensitive fields.
 
 | Identity capture | Redacted image in AresScan+ |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/main/docs/assets/screenshots/identity-scanner.png" alt="AresIdentity scanner with Minimal privacy selected and a synthetic bank card detected" width="280"> | <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/main/docs/assets/screenshots/redacted-card-aresscan.png" alt="Cropped synthetic bank card with its number masked, displayed by the AresScan+ host app" width="280"> |
+| <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/e5f4c7a85fadb22037101d5a68cadc8e435b9c9e/docs/assets/screenshots/identity-scanner.png" alt="AresIdentity scanner with Minimal privacy selected and a synthetic bank card detected" width="280"> | <img src="https://raw.githubusercontent.com/Ares-Defence-Labs/AresIdentity/e5f4c7a85fadb22037101d5a68cadc8e435b9c9e/docs/assets/screenshots/redacted-card-aresscan.png" alt="Cropped synthetic bank card with its number masked, displayed by the AresScan+ host app" width="280"> |
 
 The scanner offers Minimal, Balanced and Strict privacy levels, Redact/Analyse
 modes, document-state hints and an animated capture guide. The result screenshot
