@@ -34,7 +34,7 @@ The compiled Identity customer candidate currently registers through CocoaPods o
 
 ## Android 16 KiB pages
 
-The v2.0.2 candidate's processing library is linked with both 16 KiB maximum and
+The v2.0.3 candidate's processing library is linked with both 16 KiB maximum and
 common page alignment. Release checks inspect all arm64-v8a and x86_64 native
 libraries in the complete customer APK, including Flutter, ONNX Runtime and ML Kit,
 and verify native ZIP alignment. The ARM64 candidate has also passed native loading,
@@ -47,4 +47,4 @@ libraries. Your host application and any additional plugins must also support
 16 KiB pages. Follow [Android's page-size guidance](https://developer.android.com/guide/practices/page-sizes)
 and test your final app on a 16 KiB environment; SDK verification cannot cover other
 native libraries that your application adds. This candidate validation does not
-change the already published v2.0.2 archive.
+change the already published v2.0.3 archive.

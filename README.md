@@ -25,14 +25,14 @@ Open **AresIdentityScreen** for the supplied AresScan-style scanner, or use
 The supplied route returns the cropped image after the selected privacy treatment
 and an enum describing the applied level. Your app handles the result.
 
-**Package:** `ares_identity` v2.0.2 is a self-contained Android/iOS SDK.
+**Package:** `ares_identity` v2.0.3 is a self-contained Android/iOS SDK.
 Install it from pub.dev; the GitHub repository provides documentation and support,
 rather than the SDK implementation. No `ares_edge` package or Edge licence is
 required. See [release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md).
 
 ```yaml
 dependencies:
-  ares_identity: ^2.0.2
+  ares_identity: ^2.0.3
 ```
 
 ## Choose your scanner integration

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.3 — 2026-10-22
+
+- Plan image gallery selection so users can import an existing document photo for recognition and redaction without opening the camera.
+
+AresIdentity v2.0.3
+
 ## 2.0.2 — 2026-10-22
 
 - Enable the protected local-runner release pipeline after complete native builds, sandbox licence checks and actual 16 KiB runtime verification.
