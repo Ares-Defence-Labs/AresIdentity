@@ -70,3 +70,21 @@ scan. It accepts whole seconds from 1 to 10 and defaults to 2. It is enforced
 by the native camera; movement or stale detection cancels the countdown. A
 non-default value requires native `captureCountdownProtocol: 1`; older cores
 show an update message rather than ignoring the requested duration.
+
+## Import an existing photo
+
+The black gallery button opens the system photo picker. Cancellation leaves the
+scanner open. Set `allowGallery: false` on `AresIdentityScreen.open` or the widget
+to hide it. Selected photos are orientation-normalised and perspective-cropped
+by the licensed native Identity detector, then pass through the same selected
+Redact/Analyse mode and privacy level as a camera capture. The result remains
+`({AresIdentityRedactionLevel level, Uint8List bytes})`; no editor is included.
+A photo without a reliable document boundary fails instead of returning the
+uncropped original. The native camera is detached during picking and delivery,
+then reopens after cancellation or a recoverable failure.
+
+The stable-document countdown applies to the live camera, not gallery imports.
+Use a clear photo with all four document corners visible. Add an explanatory
+`NSPhotoLibraryUsageDescription` to the host iOS Info.plist and rebuild the app
+after adding this SDK dependency. Android uses the system picker without broad
+storage permissions. No full photo metadata access is requested.

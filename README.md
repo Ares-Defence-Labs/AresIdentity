@@ -25,14 +25,14 @@ Open **AresIdentityScreen** for the supplied AresScan-style scanner, or use
 The supplied route returns the cropped image after the selected privacy treatment
 and an enum describing the applied level. Your app handles the result.
 
-**Package:** `ares_identity` v2.0.3 is a self-contained Android/iOS SDK.
+**Package:** `ares_identity` v2.0.4 is a self-contained Android/iOS SDK.
 Install it from pub.dev; the GitHub repository provides documentation and support,
 rather than the SDK implementation. No `ares_edge` package or Edge licence is
 required. See [release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md).
 
 ```yaml
 dependencies:
-  ares_identity: ^2.0.3
+  ares_identity: ^2.0.4
 ```
 
 ## Choose your scanner integration
@@ -254,6 +254,17 @@ method. `trigger()` requests capture; permission, readiness and licence checks
 still apply. The callback returns `AresIdentityImage`, rather than the supplied
 route's processed tuple. Your app runs recognition/redaction explicitly.
 See [embedded controls and lifecycle](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md).
+
+### Gallery import
+
+The supplied scanner includes a system-gallery button (`allowGallery: false`
+hides it). Imported photos are cropped and receive the selected privacy policy
+before returning the usual bytes-and-level result. Embedded integrations can
+call `await controller.pickFromGallery()` and receive the cropped photo through
+the existing image callback, or use `AresIdentityGallery.pickImage` for a
+photo-only flow. See [supplied screen](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/scanner-screen.md#import-an-existing-photo)
+and [embedded gallery integration](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/embedded-camera.md#gallery-button-in-your-own-ui)
+for permissions, errors and Android interrupted-picker recovery.
 
 ## Model and asset protection
 

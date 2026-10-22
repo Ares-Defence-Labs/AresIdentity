@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.4 — 2026-10-22
+
+- Orient imported document pixels using on-device reading-direction checks before OCR and redaction, so sideways gallery cards retain the selected privacy treatment.
+
+- Fix the iOS source model resource path so camera and gallery imports find the canonical Identity model, and verify the built app bundle before device QA.
+
+- Import document photos from the system gallery in the supplied screen and embedded scanner, with licensed cropping, selected privacy treatment and camera lifecycle protection.
+
+AresIdentity v2.0.4
+
 ## 2.0.3 — 2026-10-22
 
 - Plan image gallery selection so users can import an existing document photo for recognition and redaction without opening the camera.

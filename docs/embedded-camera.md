@@ -67,3 +67,37 @@ document is detected. Brief holding/searching noise is smoothed for presentation
 native countdowns and capture authorization remain authoritative.
 
 `captureTimeout` configures the native automatic countdown (whole seconds 1–10; default 2). Manual `trigger()` captures immediately when ready and still enforces native licensing/document extraction.
+
+## Gallery button in your own UI
+
+Call `await controller.pickFromGallery()` from a host gallery button while the
+streamer is mounted. It returns `true` after the selected cropped image has been
+delivered through `onImageStateChange`, or `false` on cancellation/while busy.
+Catch `PlatformException` in your UI for permission, licence, invalid-image and
+`DOCUMENT_NOT_FOUND` failures. The host still owns OCR, redaction and navigation;
+the controller never changes the selected processing mode. Disable your policy
+controls until the Future completes so one import uses one selected policy.
+The SDK detaches the live camera during the picker and callback, blocks duplicate
+imports and suppresses late camera captures. Gallery images are always cropped,
+even when `extractDocument: false` requests full-frame **camera** captures.
+
+For a photo-only flow without mounting a camera, use
+`await AresIdentityGallery.pickImage(licenceKey: key)`. It returns an immutable
+`AresIdentityImage?`, with null for cancellation. For an image your app already
+selected, use `AresIdentityGallery.importImage(bytes, licenceKey: key)`.
+Both use the native licence/trial authority and refuse detection/cropping
+failures; neither applies privacy masking until you explicitly run processing.
+The byte import accepts up to 32 MiB and native decoding rejects images over
+20 megapixels. Picker imports request a maximum 4096 by 4096 image; cropped
+output has a maximum dimension of 1600 pixels. Original library photos are never
+modified or deleted. Returned bytes and any host-side copies belong to the host.
+
+On Android, Activity/process recreation can interrupt the system picker. Call
+`AresIdentityGallery.recoverLostImage(licenceKey: key)` once during host startup
+and explicitly deliver a recovered photo to your processing UI. Restore the
+intended privacy policy before processing; the SDK does not retain those choices
+or reopen a route automatically. The recovery API consumes image_picker's shared
+pending picker result, so coordinate it with any other picker use in your app.
+
+Add `NSPhotoLibraryUsageDescription` to the iOS host Info.plist. The gallery API
+sets `requestFullMetadata: false`. Android needs no broad storage permission.

@@ -1,6 +1,6 @@
 # Public API reference
 
-Import `package:ares_identity/ares_identity.dart`. These APIs are available in the v2.0.3 customer package. Internal src paths and native method-channel names are not supported integration APIs.
+Import `package:ares_identity/ares_identity.dart`. These APIs are available in the v2.0.4 customer package. Internal src paths and native method-channel names are not supported integration APIs.
 
 | API | Contract |
 | --- | --- |
@@ -27,3 +27,15 @@ Legacy Dart helper paths are private owner compatibility only and are excluded f
 AresIdentityImage contains bytes, optional width and height, and isDocumentCropped. Camera geometry and face detection are not public capture outputs. See [scanner screen](scanner-screen.md) and [recognition](recognition-and-redaction.md) for lifecycle and coordinate details.
 
 Dart API HTML is generated from the private SDK using `python3 tool/documentation/build_api.py`, which pins an isolated Dartdoc 9.0.11 tool (Dart 3.13.4+). The bundled Dartdoc 9.0.6 currently crashes while indexing dependencies. Complete guide examples are checked with `python3 tool/documentation/verify_examples.py`. Generated output is a local build artifact, not a declaration that a public release exists.
+
+## Gallery import
+
+- `AresIdentityScreen.allowGallery` / `.open(allowGallery: ...)`: show the supplied gallery button (default true).
+- `LiveIdentityEdgeScanController.pickFromGallery()`: import through the mounted scanner and its image callback; false on cancellation or while busy.
+- `AresIdentityGallery.pickImage(licenceKey: ...)`: system picker plus licensed cropping, returning `AresIdentityImage?`.
+- `AresIdentityGallery.importImage(bytes, licenceKey: ...)`: crop existing encoded image bytes.
+- `AresIdentityGallery.recoverLostImage(licenceKey: ...)`: explicitly recover an interrupted Android picker at host startup.
+
+Gallery imports check the four reading orientations on-device before returning pixels. The returned dimensions and all subsequent OCR/masking coordinates describe the chosen orientation. Temporary orientation images are deleted after processing, including on failure; the original library photo stays unchanged.
+
+See [embedded gallery integration](embedded-camera.md#gallery-button-in-your-own-ui) for the error, lifecycle and privacy contract.
