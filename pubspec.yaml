@@ -1,0 +1,9 @@
+{
+  "name": "ares_identity",
+  "version": "2.0.2",
+  "description": "Commercial Flutter identity document scanner with on-device OCR and sensitive-field redaction for Android and iOS.",
+  "homepage": "https://aresdefencelabs.com/",
+  "repository": "https://github.com/Ares-Defence-Labs/AresIdentity",
+  "issue_tracker": "https://github.com/Ares-Defence-Labs/AresIdentity/issues",
+  "documentation": "https://aresdefencelabs.com/development-sdks?sdk=identity-scanner&view=overview"
+}

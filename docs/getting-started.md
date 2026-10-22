@@ -12,7 +12,7 @@ separate Edge SDK is required.
 dependencies:
   flutter:
     sdk: flutter
-  ares_identity: ^2.0.0
+  ares_identity: ^2.0.2
 ```
 
 Run `flutter pub get`, configure [Android and iOS](platforms.md), and fully
@@ -61,4 +61,4 @@ result semantics](scanner-screen.md).
 
 Provide your application's signed Identity licence from private build configuration. Missing/invalid keys use the 60-second process trial. See [licensing](licensing.md), including isolated sandbox testing.
 
-AresIdentity includes its own compiled scanner, model loader and Identity licence verifier. It does not depend on `ares_edge`; no separate Edge key or installation is required. Version 2.0.0 includes the protected native camera and processing implementation.
+AresIdentity includes its own compiled scanner, model loader and Identity licence verifier. It does not depend on `ares_edge`; no separate Edge key or installation is required. Version 2.0.2 includes the protected native camera and processing implementation.

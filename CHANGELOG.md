@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.0.2 — 2026-10-22
+
+- Enable the protected local-runner release pipeline after complete native builds, sandbox licence checks and actual 16 KiB runtime verification.
+
+- Verify native loading, synthetic-card OCR/redaction and encrypted ONNX inference on a real 16 KiB emulator with compatibility fallback disabled before automated publication.
+- Require 16 KiB native load and RELRO safety checks across the complete customer APK, retain exact binary hashes on failure, and align the processing core for all Android ABIs.
+
+- Commit the complete standalone SDK and reconcile private repository governance with the published v2.0.0 source.
+- Add reproducible validation and guarded v2.0.1 customer-package preparation to GitHub Actions, including native Android/iOS builds and security audits.
+
+- Automate protected main-to-tag releases with Identity-scoped Cloudflare state, single-job Mac runners, sandbox-only licence checks, short-lived pub.dev credentials and documentation-only public synchronization.
+- Match generated customer registration metadata to the allocated version and verify dependency advisories and Android 16 KiB native alignment before uploading.
+
+- Verify the pinned Flutter commit while preserving its release-tag metadata on clean CI hosts, and initialize temporary publication paths within the authorized job steps.
+
+- Validate the resolved customer dependency graph with Gradle task-scoped project references and synchronize the current release-status guide with public release documentation.
+
+- Make native security-test OCR arrays explicit across compilers, reject unresolved customer module graphs without Android artifact-variant ambiguity, and expose named verification stages in CI logs.
+
+- Isolate pub dry-run dependency state from the exact upload artifact so generated local files cannot invalidate its exhaustive hash receipt before publication.
+
+AresIdentity v2.0.2
+
 ## 2.0.0 — 22 October 2026
 
 - Make AresIdentity self-contained with its own compiled camera, Identity product verifier, encrypted model loader and private `ares_identity_inferencer.onnx`; customer packages contain only `ares_identity_inferencer.aem` and no `ares_edge` dependency.

@@ -25,14 +25,14 @@ Open **AresIdentityScreen** for the supplied AresScan-style scanner, or use
 The supplied route returns the cropped image after the selected privacy treatment
 and an enum describing the applied level. Your app handles the result.
 
-**Package:** `ares_identity` v2.0.0 is a self-contained Android/iOS SDK.
+**Package:** `ares_identity` v2.0.2 is a self-contained Android/iOS SDK.
 Install it from pub.dev; the GitHub repository provides documentation and support,
 rather than the SDK implementation. No `ares_edge` package or Edge licence is
 required. See [release status](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/release-status.md).
 
 ```yaml
 dependencies:
-  ares_identity: ^2.0.0
+  ares_identity: ^2.0.2
 ```
 
 ## Choose your scanner integration
@@ -120,8 +120,7 @@ flutter pub get
 flutter run --dart-define=ARES_IDENTITY_LICENCE=YOUR_PORTAL_ISSUED_KEY
 ```
 
-Obtain an approved local candidate for evaluation; no hosted version is announced
-yet. Do not use this documentation repository as a Flutter dependency.
+Install the released package from pub.dev, or use an approved local candidate. Do not use this documentation repository as a Flutter dependency.
 See [example setup](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/example-project.md) and
 [performance testing](https://github.com/Ares-Defence-Labs/AresIdentity/blob/main/docs/performance-testing.md) for device checks.
 

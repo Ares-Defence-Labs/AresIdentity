@@ -1,6 +1,6 @@
 # Public API reference
 
-Import `package:ares_identity/ares_identity.dart`. These APIs are available in the v2.0.0 customer package. Internal src paths and native method-channel names are not supported integration APIs.
+Import `package:ares_identity/ares_identity.dart`. These APIs are available in the v2.0.2 customer package. Internal src paths and native method-channel names are not supported integration APIs.
 
 | API | Contract |
 | --- | --- |
