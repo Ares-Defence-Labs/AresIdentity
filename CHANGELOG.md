@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.5 — 2026-10-24
+
+- Measure changes in document perspective when checking motion, so a stationary angled card does not reset the capture hold on Android or iOS.
+
+- Prevent repeated brief low-texture tracking losses on dark cards from restarting a strong neural capture hold; suspend the shutter until a fresh coherent detection, while retaining movement, expiry and stale-geometry rejection.
+
+- Require Android camera-policy regressions and Swift perspective-motion regressions in the native release pipeline before publication.
+
+AresIdentity v2.0.5
+
 ## 2.0.4 — 2026-10-22
 
 - Orient imported document pixels using on-device reading-direction checks before OCR and redaction, so sideways gallery cards retain the selected privacy treatment.

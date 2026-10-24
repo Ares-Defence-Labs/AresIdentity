@@ -1,4 +1,4 @@
-# AresIdentity v2.0.4
+# AresIdentity v2.0.5
 
 Release date: 22 October 2026. This is a self-contained customer SDK with its own
 compiled camera, Identity licence verifier and encrypted model. It has no

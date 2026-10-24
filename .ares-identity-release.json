@@ -1,7 +1,7 @@
 {
-  "version": "2.0.4",
-  "manifest": "3a926ef31b795759bcb97d0ce3eec9b351506c9cec77b1203eeef8ad48b22aeb",
-  "packageArchiveSha256": "60e63a5e9c14e45c54b354ad3db7fcec33e5dbd6bfa37b5b97dff53fd5ea5c6c",
+  "version": "2.0.5",
+  "manifest": "26613799ddfeb3861619cf2d7dfe83aaef79d5acdeef2c11c9f7f28fa8f13096",
+  "packageArchiveSha256": "e82ac628ea72d3332fc178ed795ea44fbd1f6358672dc57c494bd9ba99474bce",
   "files": [
     "CHANGELOG.md",
     "CONTRIBUTING.md",
